@@ -1,5 +1,5 @@
 import icons from 'url:../img/icons.svg';
-console.log(icons)
+import renderSpinner from '../utils/renderSpinner';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -25,6 +25,8 @@ const showRecipe = async function() {
     // 1) Loading recipe
     const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
     const data = await res.json();
+
+    renderSpinner(recipeContainer);
 
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
 
@@ -132,7 +134,6 @@ const showRecipe = async function() {
 
     recipeContainer.innerHTML = '';
     recipeContainer.insertAdjacentHTML('afterbegin', markup);
-
   }
 
   catch (err) {
