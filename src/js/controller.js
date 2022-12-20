@@ -1,4 +1,7 @@
 import icons from 'url:../img/icons.svg';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 import renderSpinner from '../utils/renderSpinner';
 
 const recipeContainer = document.querySelector('.recipe');
@@ -19,6 +22,7 @@ const searchTerm = 'https://forkify-api.herokuapp.com/api/v2/recipes?search=pizz
 
 const showRecipe = async function() {
   try {
+
     const id = window.location.hash.slice(1);
     console.log(id);
 
