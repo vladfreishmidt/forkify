@@ -15,18 +15,20 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 
-const api = 'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886';
-const apiKey = '6735a6ac-f85d-43b4-9ff1-7b2523b71963';
-
 const searchTerm = 'https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza'
 
 const showRecipe = async function() {
   try {
-    // 1) Loading recipe
-    const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
-    const data = await res.json();
+    const id = window.location.hash.slice(1);
+    console.log(id);
 
+    if (!id) return;
+
+    // 1) Loading recipe
     renderSpinner(recipeContainer);
+
+    const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
+    const data = await res.json();
 
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
 
@@ -141,5 +143,11 @@ const showRecipe = async function() {
   }
 }
 
-showRecipe();
+const eventsToRenderRecipeOn = ['load', 'hashchange'];
+
+eventsToRenderRecipeOn.forEach(ev => window.addEventListener(ev, showRecipe));
+
+
+
+
 
