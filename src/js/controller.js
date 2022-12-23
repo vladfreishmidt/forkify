@@ -8,16 +8,6 @@ import renderSpinner from '../utils/renderSpinner';
 
 const recipeContainer = document.querySelector('.recipe');
 
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
-
-const searchTerm = 'https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza'
-
 const controlRecipes = async function() {
   try {
 
